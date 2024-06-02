@@ -2,39 +2,18 @@ provider "azurerm" {
   features {}
 }
 
-# Load common variables
-module "common_tags" {
+# Load common variables and tags
+module "common_vars" {
   source = "./common"
 }
 
-variable "project_name" {}
-variable "cost_center" {}
-variable "owner" {}
-variable "team_ad_group" {}
-variable "team_admin_ad_group" {}
-
-# Load variables from the tfvars file
-variable "config" {
-  type = map(string)
-  default = {
-    project_name        = var.project_name
-    team_ad_group       = var.cost_center
-    team_admin_ad_group = var.team_admin_ad_group
-    team_tags = {
-      business_unit       = var.team_tags["business_unit"]
-      cost_center         = var.team_tags["cost_center"]
-      owner               = var.team_tags["owner"]
-    }
-  }
-}
-
-# merge common tags with team tags:
+# Merge common and team tags
 locals {
-  tags = merge(module.common_vars.tags, var.config.team_tags)
-
+  merged_tags = merge(
+    module.common_vars.common_tags,
+    var.team_tags
+  )
 }
-
-
 
 
 

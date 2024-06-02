@@ -15,7 +15,7 @@ variable "team_admin_ad_group" {
 }
 
 variable "team_tags" {
-  description = "Specific tags to be applied to the resource group."
+  description = "Specific tags for the team."
   type        = map(string)
-  default = {}
+  default     = {}
 }
