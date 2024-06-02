@@ -26,7 +26,7 @@ resource "azurerm_subnet" "key_vault_subnet" {
   delegation {
     name = "keyvault-delegation"
     service_delegation {
-      name = "Microsoft.KeyVault/vaults"
+      name    = "Microsoft.KeyVault/vaults"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
     }
   }
@@ -47,7 +47,7 @@ resource "azurerm_subnet" "storage_account_subnet" {
   delegation {
     name = "storage-delegation"
     service_delegation {
-      name = "Microsoft.Storage/storageAccounts"
+      name    = "Microsoft.Storage/storageAccounts"
       actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
     }
   }

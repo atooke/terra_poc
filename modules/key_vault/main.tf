@@ -16,8 +16,8 @@ resource "azurerm_key_vault" "team_kv" {
   tenant_id           = var.tenant_id
   sku_name            = "standard"
   network_acls {
-    default_action = "Deny"
-    bypass = "AzureServices"
+    default_action             = "Deny"
+    bypass                     = "AzureServices"
     virtual_network_subnet_ids = [var.subnet_id]
   }
 

@@ -1,5 +1,0 @@
-project_name       = "example-project"
-cost_center        = "CC1234"
-owner              = "owner@example.com"
-team_ad_group      = "team-ad-group-id"
-team_admin_ad_group= "team-admin-ad-group-id"

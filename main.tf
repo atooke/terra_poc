@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 # Load common variables
-module "common_vars" {
+module "common_tags" {
   source = "./common"
 }
 
@@ -18,20 +18,36 @@ variable "config" {
   type = map(string)
   default = {
     project_name        = var.project_name
-    cost_center         = var.cost_center
-    owner               = var.owner
-    team_ad_group       = var.team_ad_group
+    team_ad_group       = var.cost_center
     team_admin_ad_group = var.team_admin_ad_group
+    team_tags = {
+      business_unit       = var.team_tags["business_unit"]
+      cost_center         = var.team_tags["cost_center"]
+      owner               = var.team_tags["owner"]
+    }
   }
 }
 
+# merge common tags with team tags:
+locals {
+  tags = merge(module.common_vars.tags, var.config.team_tags)
+
+}
+
+
+
+
+
+
+
+
 # Resource Group
 module "resource_group" {
-  source         = "./modules/resource_group"
-  project_name   = var.config.project_name
-  cost_center    = var.config.cost_center
-  owner          = var.config.owner
-  location       = module.common_vars.location
+  source       = "./modules/resource_group"
+  project_name = var.config.project_name
+  cost_center  = var.config.cost_center
+  owner        = var.config.owner
+  location     = module.common_vars.location
 }
 
 # VNet and Subnets

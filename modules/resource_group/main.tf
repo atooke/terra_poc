@@ -12,4 +12,6 @@ resource "azurerm_resource_group" "team_rg" {
     cost_center = var.cost_center
     owner       = var.owner
   }
+
+  
 }
